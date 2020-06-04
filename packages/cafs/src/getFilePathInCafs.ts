@@ -1,4 +1,5 @@
 import { IntegrityLike } from 'ssri'
+import base32Encode = require('base32-encode')
 import path = require('path')
 import ssri = require('ssri')
 
@@ -28,7 +29,8 @@ function contentPathFromIntegrity (
   fileType: FileType
 ) {
   const sri = ssri.parse(integrity, { single: true })
-  return contentPathFromHex(fileType, sri.hexDigest())
+  const base32 = base32Encode(Buffer.from(sri.digest, 'base64'), 'Crockford', { padding: false })
+  return contentPathFromHex(fileType, base32)
 }
 
 export function contentPathFromHex (fileType: FileType, hex: string) {

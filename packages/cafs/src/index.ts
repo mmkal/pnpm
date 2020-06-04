@@ -13,6 +13,7 @@ import getFilePathInCafs, {
   modeIsExecutable,
 } from './getFilePathInCafs'
 import writeFile from './writeFile'
+import base32Encode = require('base32-encode')
 import fs = require('mz/fs')
 import path = require('path')
 import getStream = require('get-stream')
@@ -58,7 +59,7 @@ async function addBufferToCafs (
 ): Promise<FileWriteResult> {
   const integrity = ssri.fromData(buffer)
   const isExecutable = modeIsExecutable(mode)
-  const fileDest = contentPathFromHex(isExecutable ? 'exec' : 'nonexec', integrity.hexDigest())
+  const fileDest = contentPathFromHex(isExecutable ? 'exec' : 'nonexec', base32Encode(Buffer.from(integrity.sha512[0].digest, 'base64'), 'Crockford', { padding: false }))
   const checkedAt = await writeBufferToCafs(
     buffer,
     fileDest,
