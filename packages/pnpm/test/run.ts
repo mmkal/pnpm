@@ -51,7 +51,7 @@ test('start: run "node server.js" by default', async (t: tape.Test) => {
 
   const result = execPnpmSync(['start'])
 
-  t.ok((result.stdout as Buffer).toString('utf8').match(/Hello world!/), 'command was successful')
+  t.equal((result.stdout as Buffer).toString('utf8'), 'Hello world!\n', 'command was successful')
 })
 
 test('install-test: install dependencies and runs tests', async (t: tape.Test) => {
