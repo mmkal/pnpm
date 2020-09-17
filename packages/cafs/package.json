@@ -34,7 +34,7 @@
     "@types/concat-stream": "^1.6.0",
     "@types/mz": "^2.7.1",
     "@types/node": "^12.12.56",
-    "@types/ssri": "^6.0.3",
+    "@types/ssri": "^7.0.0",
     "@types/tar-stream": "^2.1.0",
     "tempy": "^0.7.0"
   },
